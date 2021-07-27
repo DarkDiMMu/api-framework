@@ -11,12 +11,12 @@ export default class Steps {
   };
   private static async getCatById(id: number): Promise<AxiosResponse<{ cat: Cat }>> {
     return await allure.step(`выполнен запрос GET /get-by-id c параметром ${id}`, async () => {
-      console.info('тест 2 🚀:', 'выполняется запрос GET /get-by-id');
+      console.info('выполняется запрос GET /get-by-id');
       const response = await CoreApi.getCatById(id);
       const data = JSON.stringify(response.data, null, 2);
-      console.info('тест 2 🚀:', 'получен ответ на запрос GET /get-by-id:\n', data);
+      console.info('получен ответ на запрос GET /get-by-id:\n', data);
       allure.attachment('attachment', data, 'application/json');
-      console.info('тест 2 🚀:', 'получен ответ на запрос GET /get-by-id:\n', response.data);
+      console.info('получен ответ на запрос GET /get-by-id:\n', response.data);
       return response;
     });
   }

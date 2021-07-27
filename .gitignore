@@ -104,3 +104,7 @@ dist
 .tern-port
 
 .idea
+
+# allure resudlts and reports
+allure-report/
+allure-results/

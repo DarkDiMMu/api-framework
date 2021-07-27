@@ -19,7 +19,11 @@ export default class CoreApi extends Client {
       const params = new URLSearchParams({ id: id.toString() });
       response = await this.coreApiHttpClient.get(`${this.api}/get-by-id?${params}`);
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        response = error.response;
+      } else {
+        console.error(error);
+      }
     }
     return response;
   }
@@ -27,12 +31,16 @@ export default class CoreApi extends Client {
   /**
    * Get-Метод получения всех котов [all]{@link https://meowle.qa-fintech.ru/api/core/api-docs-ui/#/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA/get_cats_all}
    */
-  static async getAllCats(): Promise<AxiosResponse<{ groups: { title: string; cats: Cat[] }[] }>> {
+  static async getAllCats(): Promise<AxiosResponse<{ groups: { title: string; count: number; cats: Cat[] }[] }>> {
     let response: AxiosResponse;
     try {
       response = await this.coreApiHttpClient.get(`${this.api}/all`);
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        response = error.response;
+      } else {
+        console.error(error);
+      }
     }
     return response;
   }
@@ -71,7 +79,11 @@ export default class CoreApi extends Client {
         cats: cats,
       });
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        response = error.response;
+      } else {
+        console.error(error);
+      }
     }
     return response;
   }

@@ -1,17 +1,25 @@
 import { assert } from 'chai';
 import CoreApi from '../src/http/CoreApi';
+import getRandomCat from '../src/utils/getRandomCat';
 
 describe('Проверка функционала добавления котов', async () => {
-  it('Получение кота по id', async () => {
-    const name = 'Вики';
+  let cat;
 
-    const response = await CoreApi.getCatById(101368);
+  before(async () => {
+    cat = (await getRandomCat()).cat;
+    console.log(cat);
+  })
+
+  it('Получение кота по id', async () => {
+    const name = cat.name;
+
+    const response = await CoreApi.getCatById(cat.id);
 
     assert.equal(response.data.cat.name, name, 'Имена не соответствуют');
   });
 
   it('Поиск существующего кота', async () => {
-    const expName = 'Балу';
+    const expName = cat.name;
 
     const response = await CoreApi.searchCatByPartName(expName);
     if (response.status === 404) {
@@ -34,25 +42,21 @@ describe('Проверка функционала добавления кото�
   });
 
   it('Проверка данных о коте', async () => {
-    const cat_exp = {
-      id: 101368,
-      name: 'Вики',
-      description: 'Hdijd',
-      tags: null,
-      gender: 'female',
-      likes: 560,
-      dislikes: 0,
-    };
+    const response = await CoreApi.getCatById(cat.id);
 
-    const response = await CoreApi.getCatById(101368);
-
-    assert.deepEqual(response.data.cat, cat_exp);
+    assert.deepEqual(response.data.cat, cat);
   });
 
   it('Проверка что все коты из списка женского пола', async () => {
-    const catsIdList = [103775, 101377, 101437];
+    const catsIdList = [
+      (await getRandomCat()).cat.id,
+      (await getRandomCat()).cat.id,
+      (await getRandomCat()).cat.id,
+    ];
     const gender = `female`;
     const genderList = [];
+
+    console.log(catsIdList);
 
     // Использование цикла for (последовательное выполнение операций)
     console.time('for');
