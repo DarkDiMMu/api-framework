@@ -23,9 +23,9 @@ export default class Steps {
 
   private static async equal(exp: any, act: any) {
     return await allure.step('выполнена проверка соответствия значений', () => {
-      allure.attachment('expected', exp, 'text/plain');
-      allure.attachment('actual', act, 'text/plain');
-      assert.equal(exp, act, 'Значения не соответствуют');
+      allure.attachment('expected', exp.toString(), 'text/plain');
+      allure.attachment('actual', act.toString(), 'text/plain');
+      assert.strictEqual(exp, act, 'Значения не соответствуют');
     });
   }
 }

@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 import CoreApi from '../src/http/CoreApi';
-import getRandomCat from '../src/utils/getRandomCat';
+import GetRandomCat from '../src/utils/getRandomCat';
 
 describe('Проверка функционала добавления котов', async () => {
   let cat;
 
   before(async () => {
-    cat = (await getRandomCat()).cat;
+    cat = (await GetRandomCat.withoutReport()).cat;
     console.log(cat);
   })
 
@@ -49,9 +49,9 @@ describe('Проверка функционала добавления кото�
 
   it('Проверка что все коты из списка женского пола', async () => {
     const catsIdList = [
-      (await getRandomCat()).cat.id,
-      (await getRandomCat()).cat.id,
-      (await getRandomCat()).cat.id,
+      (await GetRandomCat.withoutReport()).cat.id,
+      (await GetRandomCat.withoutReport()).cat.id,
+      (await GetRandomCat.withoutReport()).cat.id,
     ];
     const gender = `female`;
     const genderList = [];

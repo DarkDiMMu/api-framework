@@ -2,7 +2,7 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "target": "es2020",
-    "module": "commonjs",
+    "module": "CommonJS",
     "types": ["node", "mocha"],
     "typeRoots": ["./@types", "./node_modules/@types"]
   },

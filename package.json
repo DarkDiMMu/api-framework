@@ -6,7 +6,7 @@
   "scripts": {
     "report": "allure generate ./allure-results -c && allure open",
     "testALL": "mocha tests/**/*.ts",
-    "test": "mocha tests/hw1.ts"
+    "test": "mocha tests/hw2.2.ts"
   },
   "keywords": [],
   "author": "",

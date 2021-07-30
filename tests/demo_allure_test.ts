@@ -2,10 +2,10 @@ import { assert } from 'chai';
 import CoreApi from '../src/http/CoreApi';
 import { allure } from 'allure-mocha/runtime';
 import Steps from '../src/steps/Steps';
-import getRandomCat from '../src/utils/getRandomCat';
+import GetRandomCat from '../src/utils/getRandomCat';
 
 describe('Проверка имени кота', async () => {
-  const cat = await getRandomCat();
+  const cat = await GetRandomCat.withoutReport();
   const name = cat.cat.name;
   const id = cat.cat.id;
 
