@@ -12,6 +12,27 @@ describe('Дополнительное домашнее задание 1', () =>
   let likes: number;
   let likesCount: number = 10;
 
+  after(async () => {
+    if (likes > 0) {
+      console.info(
+        `удаляем кота, создаем нового такого же, ставим ему нужное кол-во лайков - ${likes}`
+      );
+      await CoreApi.removeCat(randomCat.cat.id);
+      const response = await CoreApi.addCat([
+        {
+          name: randomCat.cat.name,
+          description: randomCat.cat.description,
+          gender: randomCat.cat.gender,
+        },
+      ]);
+      await Promise.all(
+        Array(likes)
+          .fill(null)
+          .map((_) => LikeApi.likes(response.data.cats[0].id, { like: true, dislike: false }))
+      );
+    }
+  });
+
   it('Найден случайный котик', async () => {
     randomCat = await GetRandomCat.withReport();
     assert.equal(randomCat.status, 200, 'Кот не найден!');
